@@ -6,6 +6,8 @@
 
 using namespace std;
 
+float mixAmount = 0.0;
+
 void framebuffer_size_callback(GLFWwindow *window, int width, int height)
 {
 	glViewport(0, 0, width, height);
@@ -16,6 +18,24 @@ void processInput(GLFWwindow *window)
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 	{
 		glfwSetWindowShouldClose(window, true);
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+	{
+		mixAmount += 0.01;
+		if (mixAmount >= 1.0)
+		{
+			mixAmount = 1.0;
+		}
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+	{
+		mixAmount -= 0.01;
+		if (mixAmount <= 0.0)
+		{
+			mixAmount = 0.0;
+		}
 	}
 }
 
@@ -163,6 +183,7 @@ int main() {
 		shader.use();
 		shader.setInt("texture1", 0);
 		shader.setInt("texture2", 1);
+		shader.setFloat("mixAmount", mixAmount);
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
