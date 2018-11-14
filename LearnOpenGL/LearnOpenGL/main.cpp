@@ -3,6 +3,9 @@
 #include <iostream>
 #include "shader.h"
 #include <stb/stb_image.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 using namespace std;
 
@@ -69,10 +72,10 @@ int main() {
 	// Vertex Data
 	float vertices[] = {
 	//   x     y    z    r    g    b    s    t
-		 0.5,  0.5, 0.0, 1.0, 0.0, 0.0, 2.0, 2.0, // 0
-		 0.5, -0.5, 0.0, 0.0, 1.0, 0.0, 2.0, 0.0, // 1
+		 0.5,  0.5, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, // 0
+		 0.5, -0.5, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, // 1
 		-0.5, -0.5, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, // 2
-		-0.5,  0.5, 0.0, 1.0, 1.0, 0.0, 0.0, 2.0  // 3
+		-0.5,  0.5, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0  // 3
 	};
 
 	unsigned int indices[] = {
@@ -121,8 +124,8 @@ int main() {
 	unsigned int texture, texture2;
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
@@ -145,8 +148,8 @@ int main() {
 	glBindTexture(GL_TEXTURE_2D, texture2);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 	stbi_set_flip_vertically_on_load(true);
 	data = stbi_load("awesomeface.png", &width, &height, &nrChannels, 0);
