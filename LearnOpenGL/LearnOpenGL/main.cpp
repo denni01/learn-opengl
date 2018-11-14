@@ -6,7 +6,7 @@
 
 using namespace std;
 
-float mixAmount = 0.0;
+float mixAmount = 0.2;
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height)
 {
@@ -69,10 +69,10 @@ int main() {
 	// Vertex Data
 	float vertices[] = {
 	//   x     y    z    r    g    b    s    t
-		 0.5,  0.5, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, // 0
-		 0.5, -0.5, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, // 1
+		 0.5,  0.5, 0.0, 1.0, 0.0, 0.0, 2.0, 2.0, // 0
+		 0.5, -0.5, 0.0, 0.0, 1.0, 0.0, 2.0, 0.0, // 1
 		-0.5, -0.5, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, // 2
-		-0.5,  0.5, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0  // 3
+		-0.5,  0.5, 0.0, 1.0, 1.0, 0.0, 0.0, 2.0  // 3
 	};
 
 	unsigned int indices[] = {
@@ -121,8 +121,8 @@ int main() {
 	unsigned int texture, texture2;
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
