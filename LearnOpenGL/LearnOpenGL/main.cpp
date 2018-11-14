@@ -2,7 +2,7 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "shader.h"
-#include <stb\stb_image.h>
+#include <stb/stb_image.h>
 
 using namespace std;
 
